@@ -1,33 +1,31 @@
 import {
-    Entity,
-    PrimaryGeneratedColumn,
-    Column,
-    JoinColumn,
-    ManyToOne,
-  } from 'typeorm';
-  import { IsNumber, IsRFC3339 } from 'class-validator';
-  import { UserEntity } from 'src/users/entities/user.entity';
-  
-  @Entity('score')
-  export class ScoreEntity {
-    @PrimaryGeneratedColumn()
-    id: number;
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  JoinColumn,
+  ManyToOne,
+} from 'typeorm';
+import { IsNumber, IsRFC3339 } from 'class-validator';
+import { UserEntity } from 'src/users/entities/user.entity';
 
-    @Column()
-    @IsNumber()
-    awarded_points: number;
+@Entity('score')
+export class ScoreEntity {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    @IsRFC3339()
-    awarded_date: number;
+  @Column()
+  @IsNumber()
+  awarded_points: number;
 
-    @ManyToOne(() => UserEntity, user => user.points)
-    @JoinColumn()
-    user: UserEntity;
+  @Column()
+  @IsRFC3339()
+  awarded_date: number;
 
-    @ManyToOne(() => UserEntity, user => user.awarded_by)
-    @JoinColumn()
-    awarded_by: UserEntity;
-    
-  }
-  
+  @ManyToOne(() => UserEntity, (user) => user.points)
+  @JoinColumn()
+  user: UserEntity;
+
+  @ManyToOne(() => UserEntity, (user) => user.awarded_by)
+  @JoinColumn()
+  awarded_by: UserEntity;
+}

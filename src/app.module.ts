@@ -11,7 +11,7 @@ import { ScoresModule } from './scores/scores.module';
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot(),
     UsersModule,
-    ScoresModule
+    ScoresModule,
   ],
   providers: [Logger],
 })

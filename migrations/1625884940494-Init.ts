@@ -67,7 +67,7 @@ export class Init1625884940494 implements MigrationInterface {
     );
 
     await queryRunner.addColumn(
-      'user_id',
+      'score',
       new TableColumn({
         name: 'user_id',
         type: 'int',
@@ -75,11 +75,11 @@ export class Init1625884940494 implements MigrationInterface {
     );
 
     await queryRunner.createForeignKey(
-      'user_id',
+      'score',
       new TableForeignKey({
         columnNames: ['user_id'],
         referencedColumnNames: ['id'],
-        referencedTableName: 'score',
+        referencedTableName: 'user',
         onDelete: 'CASCADE',
       }),
     );
