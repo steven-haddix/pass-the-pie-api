@@ -23,6 +23,7 @@ $ docker compose up
 
 ## TODO
 - Document running TypeORM commands in Docker
+- Document Postgres migration/init processes
 - Publish swagger docs to Github Page
 - Complete data model for use scoring
 - Implement teams/groups
