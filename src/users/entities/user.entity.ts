@@ -9,7 +9,7 @@ import {
 } from 'typeorm';
 import { IsEmail } from 'class-validator';
 import * as argon2 from 'argon2';
-import { ScoreEntity } from 'src/scores/entities/score.entity';
+import { ScoreEntity } from '../../scores/entities/score.entity';
 
 @Entity('user')
 export class UserEntity {

@@ -4,9 +4,10 @@ import {
   Column,
   JoinColumn,
   ManyToOne,
+  BeforeInsert,
 } from 'typeorm';
-import { IsNumber, IsRFC3339 } from 'class-validator';
-import { UserEntity } from 'src/users/entities/user.entity';
+import { IsNumber, IsDate } from 'class-validator';
+import { UserEntity } from '../../users/entities/user.entity';
 
 @Entity('score')
 export class ScoreEntity {
@@ -18,8 +19,8 @@ export class ScoreEntity {
   awarded_points: number;
 
   @Column()
-  @IsRFC3339()
-  awarded_date: number;
+  @IsDate()
+  awarded_date: Date;
 
   @ManyToOne(() => UserEntity, (user) => user.points)
   @JoinColumn()
@@ -28,4 +29,9 @@ export class ScoreEntity {
   @ManyToOne(() => UserEntity, (user) => user.awarded_by)
   @JoinColumn()
   awarded_by: UserEntity;
+
+  @BeforeInsert()
+  async hashPassword() {
+    this.awarded_date = new Date();
+  }
 }

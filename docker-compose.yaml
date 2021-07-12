@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   main:
-    container_name: payments-api
+    container_name: pie-api
     build:
       context: .
       target: development
@@ -21,12 +21,12 @@ services:
       - redis
       - postgres
   redis:
-    container_name: payments-redis
+    container_name: pie-redis
     image: redis:5
     networks:
       - webnet
   postgres:
-    container_name: payments-postgres
+    container_name: pie-postgres
     image: postgres:12
     networks:
       - webnet

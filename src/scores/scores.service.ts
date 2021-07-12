@@ -1,11 +1,36 @@
 import { Injectable } from '@nestjs/common';
-import { CreateScoreDto } from './dto/create-score.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { UserEntity } from 'src/users/entities/user.entity';
+import { Repository } from 'typeorm';
+import { AwardPointsDTO } from './dto/award-points.dto';
 import { UpdateScoreDto } from './dto/update-score.dto';
+import { ScoreEntity } from './entities/score.entity';
 
 @Injectable()
 export class ScoresService {
-  create(createScoreDto: CreateScoreDto) {
-    return 'This action adds a new score';
+  constructor(
+    @InjectRepository(ScoreEntity)
+    private readonly scoreRepository: Repository<ScoreEntity>,
+    @InjectRepository(UserEntity)
+    private readonly userRepository: Repository<UserEntity>,
+  ) {}
+
+  async awardPoints(awardPointsDTO: AwardPointsDTO) {
+    const score = new ScoreEntity();
+    score.awarded_points = awardPointsDTO.awarded_points;
+
+    const awardedUserEntity = await this.userRepository.findOne(
+      awardPointsDTO.awarded_user,
+    );
+
+    score.user = awardedUserEntity;
+
+    const scoreEntity = await this.scoreRepository.save(score);
+
+    awardedUserEntity.points.push(scoreEntity);
+
+    await this.userRepository.save(awardedUserEntity);
+    return scoreEntity;
   }
 
   findAll() {

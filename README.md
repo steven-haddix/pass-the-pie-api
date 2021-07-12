@@ -30,8 +30,7 @@
 
 ```bash
 $ npm install
-$ npm i -g ts-node
-$ npm i -g typeorm
+$ npm i -g ts-node typeorm
 ```
 
 ## Running the app

@@ -8,7 +8,7 @@ import {
   Delete,
 } from '@nestjs/common';
 import { ScoresService } from './scores.service';
-import { CreateScoreDto } from './dto/create-score.dto';
+import { AwardPointsDTO } from './dto/award-points.dto';
 import { UpdateScoreDto } from './dto/update-score.dto';
 
 @Controller('scores')
@@ -16,8 +16,8 @@ export class ScoresController {
   constructor(private readonly scoresService: ScoresService) {}
 
   @Post()
-  create(@Body() createScoreDto: CreateScoreDto) {
-    return this.scoresService.create(createScoreDto);
+  create(@Body() awardPointsDTO: AwardPointsDTO) {
+    return this.scoresService.awardPoints(awardPointsDTO);
   }
 
   @Get()
